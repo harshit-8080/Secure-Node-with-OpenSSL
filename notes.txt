@@ -1,0 +1,45 @@
+Secure Node JS Our server
+------------------------------------------------------------
+1. http is not secure. Anyone having network traffic control can read our request and response.
+2. Read our data using application like wireShark.
+3  https uses ssl and tsl protocol to establish our http connection.
+4. ssl and tsl -> tsl is latest version of ssl and it's successor of ssl.
+5. Digital certificate -> used to verify server's ownership prior to sending encrypted data.
+6. Certificate Authority -> a trusted org. that issued a digial certificates.
+7. Our computer or browser trusts these Certificate Authority.
+
+
+-------------------------------------------------------------
+
+8. Now we have two option either use CA signed certificates or self-signed certificates.
+    1.  CA signed certificates -> trusted by most clients on web and useful in prod. (like let's encrypt)
+    2.  self signed certificates -> enable https but not trusted by others and useful in dev.
+
+
+9.  OpenSSL is an open-source command line tool that is commonly used to generate private keys, create CSRs, install your SSL/TLS certificate, and identify certificate information.
+10. Command used for to create key.pem and cert.pem file
+    -> openssl req -x509 -newkey rsa:4096 -nodes -keyout key.pem -out cert.pem -days 365
+
+
+----------------------------------------------------------------
+
+11. Helmet.js is a Node.js module that helps in securing HTTP headers.  
+12. It sets up various HTTP headers to prevent attacks like Cross-Site-Scripting(XSS), clickjacking, etc.
+13. Imp to secure http header - HTTP headers can leak sensitive information about the application.
+14. We can use helmet as middleware for every request.
+
+
+-----------------------------------------------------------------
+
+15. Authentication - done using some kind of userID and password to check. 
+16. Authorization - we use to check if logged in person has access of certain thing or not.
+
+
+
+-------------------------------------------------------------------
+
+17. The SSL certificate is not going to be valid for 90 days. You need to set up an automated system for renewing it.
+18. How? Using a cron job.
+19. A cron job is a way to run tasks every interval of time. It can be every week, every minute, every month.
+29. In our case we'll run the renewal script twice per day, as recommended in the Certbot documentation
+
